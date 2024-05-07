@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const xlsx = require('xlsx');
 
 
 async function run() {
@@ -12,8 +13,14 @@ async function run() {
             'job_position': card.querySelector('a').title,
             'company': card.querySelector('h3').title,
             'link': card.querySelector('a').href,
-        })); 
+        }));
     });
+    const workbook = xlsx.utils.book_new();
+    const worksheet = xlsx.utils.json_to_sheet(jobs);
+    xlsx.utils.book_append_sheet(workbook, worksheet, 'Jobs');
+    xlsx.writeFile(workbook, 'JobData.xlsx');
+
+
 
     console.log(jobs)
 
