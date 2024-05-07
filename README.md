@@ -8,7 +8,7 @@ https://github.com/taukirsheikh/scraping-job-with-puppeteer.git
    ```
    npm i
    ```
-3. Run the scrppper file
+3. Run the index.js file
    ```
    npm start
    ```
