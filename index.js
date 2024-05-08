@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const xlsx = require('xlsx');
+const fs = require('fs');
 
 
 async function run() {
@@ -19,6 +20,15 @@ async function run() {
     const worksheet = xlsx.utils.json_to_sheet(jobs);
     xlsx.utils.book_append_sheet(workbook, worksheet, 'Jobs');
     xlsx.writeFile(workbook, 'JobData.xlsx');
+    const csvData = jobs.map(job => Object.values(job).join(',')).join('\n');
+    fs.writeFileSync('JobData.csv', csvData);
+    
+    const jsonData = JSON.stringify(jobs, null,1);
+
+    // Write JSON data to a file
+    fs.writeFileSync('JobData.json', jsonData);
+
+    console.log('Data written to JobData.json');
 
 
 
